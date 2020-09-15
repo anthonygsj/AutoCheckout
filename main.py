@@ -16,7 +16,7 @@ class AutoCheckout(object):
 			self.await_drop()
 
 	def await_drop(self):
-		drop_time_hour_utc = 15
+		drop_time_hour_utc = 14 #14:00 utc = 11am eastern when daylightsaving is on
 
 		while time.gmtime().tm_hour != drop_time_hour_utc:
 			time.sleep(1)
