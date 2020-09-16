@@ -34,10 +34,9 @@ class AutoCheckout(object):
 				product_element = self.browser.find_element_by_xpath('//a[text() = \'{}\']'.format(self.keys['product-name']))
 			except:
 				print('Shop page is still loading, trying again..')
-				time.sleep(0.5)
+				time.sleep(0.2)
 		product_element.click()
 
-		time.sleep(0.5)
 
 		color_element = None
 
@@ -46,11 +45,10 @@ class AutoCheckout(object):
 				color_element = self.browser.find_element_by_xpath('//button[@data-style-name=\'{}\']'.format(self.keys['product-style']))
 			except:
 				print('Product page still loading, trying again..')
-				time.sleep(0.5)
+				time.sleep(0.2)
 
 		color_element.click()
 
-		time.sleep(0.3)
 
 		try:
 			Select(self.browser.find_element_by_xpath('//*[@id="s"]')).select_by_visible_text(self.keys['product-size'])
@@ -67,11 +65,9 @@ class AutoCheckout(object):
 			except:
 				print('Item is not currently available, checking for restock...')
 				self.browser.refresh()
-				time.sleep(3)
+				time.sleep(0.5)
 
 		cart_element.click()
-
-		time.sleep(0.3)
 
 		checkout_element = None
 		while not checkout_element:
@@ -79,7 +75,7 @@ class AutoCheckout(object):
 				checkout_element = self.browser.find_element_by_link_text('checkout now')
 			except:
 				print('checkout button not yet shown, trying again..')
-				time.sleep(0.5)
+				time.sleep(0.2)
 		checkout_element.click()
 
 		self.checkout()
@@ -91,7 +87,7 @@ class AutoCheckout(object):
 				namefield = self.browser.find_element_by_xpath('//*[@id="order_billing_name"]')
 			except:
 				print('Checkout page not yet loaded, trying again..')
-				time.sleep(0.5)
+				time.sleep(0.2)
 		namefield.send_keys(self.keys['name'])
 		self.browser.find_element_by_xpath('//*[@id="order_email"]').send_keys(self.keys['email'])
 		self.browser.find_element_by_xpath('//*[@id="order_tel"]').send_keys(self.keys['telephone'])
